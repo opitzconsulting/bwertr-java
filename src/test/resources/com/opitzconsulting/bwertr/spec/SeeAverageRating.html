@@ -1,0 +1,47 @@
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+<body>
+<h1>F3: See average rating</h1>
+
+<p>As a user, I want to see the presentation's average rating because I'm curious.</p>
+
+<div class="example">
+    <h3>Examples</h3>
+
+    <p>
+        Given some ratings,<br/>
+        When I have a look at the results,<br/>
+        Then the average rating is shown.
+    </p>
+    <table concordion:execute="#averageRating = averageRatingFor(#ratingsGiven)">
+        <tr>
+            <th concordion:set="#ratingsGiven">Ratings given</th>
+            <th concordion:assertEquals="#averageRating">Average rating</th>
+        </tr>
+        <tr>
+            <td></td>
+            <td>Unknown</td>
+        </tr>
+        <tr>
+            <td>Poor,Poor</td>
+            <td>Poor</td>
+        </tr>
+        <tr>
+            <td>Poor,Average</td>
+            <td>Average</td>
+        </tr>
+        <tr>
+            <td>Poor,Excellent</td>
+            <td>Average</td>
+        </tr>
+        <tr>
+            <td>Average,Average,Excellent</td>
+            <td>Average</td>
+        </tr>
+        <tr>
+            <td>Average,Excellent,Excellent</td>
+            <td>Excellent</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

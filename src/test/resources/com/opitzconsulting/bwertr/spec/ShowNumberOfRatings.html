@@ -1,0 +1,19 @@
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+<body>
+<h1>F1: Show number of ratings</h1>
+<p>As a user, I want to see the number of ratings in order to feel compelled to rate, too.</p>
+<div class="example">
+    <h3>Examples</h3>
+    <p>
+        Given there are <b concordion:set="#numberOfRatings">0</b> ratings,<br/>
+        When I use the application,<br/>
+        Then I see that there are <b concordion:assertEquals="numberOfRatingsShownWhenThereAre(#numberOfRatings)">0</b> ratings.
+    </p>
+    <p>
+        Given there are <b concordion:set="#numberOfRatings">42</b> ratings,<br/>
+        When I use the application,<br/>
+        Then I see that there are <b concordion:assertEquals="numberOfRatingsShownWhenThereAre(#numberOfRatings)">42</b> ratings.
+    </p>
+</div>
+</body>
+</html>

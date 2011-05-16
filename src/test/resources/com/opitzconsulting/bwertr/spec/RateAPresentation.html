@@ -1,0 +1,35 @@
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+<body>
+<h1>F2: Rate a presentation</h1>
+
+<p>As a user, I want to rate a presentation, so that I can help improve the presenters performance.</p>
+
+<div class="example">
+    <h3>Examples</h3>
+
+    <p>
+        Given I use the application,<br/>
+        When I rate a presentation with certain rating<br/>
+        Then I can see that rating.
+    </p>
+    <table concordion:execute="#ratingShown = ratingShownAfterRatingWith(#ratingGiven)">
+        <tr>
+            <th concordion:set="#ratingGiven">Rating given</th>
+            <th concordion:assertEquals="#ratingShown">Rating shown</th>
+        </tr>
+        <tr>
+            <td>Poor</td>
+            <td>Poor</td>
+        </tr>
+        <tr>
+            <td>Average</td>
+            <td>Average</td>
+        </tr>
+        <tr>
+            <td>Excellent</td>
+            <td>Excellent</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
