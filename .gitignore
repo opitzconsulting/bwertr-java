@@ -1,4 +1,4 @@
-.idea/
-db/bwertr.*
-target/
+.idea
+target
+var
 *.iml

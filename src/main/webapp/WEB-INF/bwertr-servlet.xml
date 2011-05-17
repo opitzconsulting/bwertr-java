@@ -15,4 +15,6 @@
           p:suffix=".jsp"
           p:viewClass="org.springframework.web.servlet.view.JstlView" />
 
+    <context:component-scan base-package="com.opitzconsulting.bwertr.controller"/>
+
 </beans>
