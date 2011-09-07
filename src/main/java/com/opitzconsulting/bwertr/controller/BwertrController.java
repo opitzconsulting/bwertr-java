@@ -27,15 +27,28 @@ public class BwertrController {
     @SuppressWarnings({"unchecked"})
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String welcome(Map model) {
-        model.put("numberOfRatings", jdbcTemplate.queryForInt("SELECT COUNT(*) FROM RATINGS"));
+        model.put("numberOfRatings", numberOfRatings());
         return "welcome";
     }
 
     @SuppressWarnings({"unchecked"})
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String rate(@RequestParam String rating, Map model) {
+        addRating(rating);
         model.put("givenRating", rating);
         return "thankYou";
+    }
+
+    private int numberOfRatings() {
+        return jdbcTemplate.queryForInt("SELECT COUNT(*) FROM RATINGS");
+    }
+
+    private void addRating(String rating) {
+        jdbcTemplate.update("INSERT INTO RATINGS (RATING) VALUES (?)", valueOf(rating));
+    }
+
+    private int valueOf(String rating) {
+        return possibleRatings().indexOf(rating);
     }
 
 }

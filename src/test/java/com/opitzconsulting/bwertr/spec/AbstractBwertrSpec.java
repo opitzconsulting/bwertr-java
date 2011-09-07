@@ -9,6 +9,8 @@ import java.io.IOException;
 
 public abstract class AbstractBwertrSpec {
 
+    protected final BwertrDriver bwertrDriver = new BwertrDriver();
+
     @BeforeClass
     public static void extendConcordion() {
         System.setProperty("concordion.output.dir", "target/concordion");
