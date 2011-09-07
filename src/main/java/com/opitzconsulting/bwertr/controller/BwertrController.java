@@ -1,7 +1,7 @@
 package com.opitzconsulting.bwertr.controller;
 
+import com.opitzconsulting.bwertr.model.Presentation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,44 +11,37 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 import java.util.Map;
 
-import static java.util.Arrays.asList;
-
 @Controller
 public class BwertrController {
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private Presentation presentation;
 
     @ModelAttribute("possibleRatings")
     public List<String> possibleRatings() {
-        return asList("Poor", "Average", "Excellent");
+        return presentation.possibleRatings();
     }
 
     @SuppressWarnings({"unchecked"})
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String welcome(Map model) {
-        model.put("numberOfRatings", numberOfRatings());
+        model.put("numberOfRatings", presentation.numberOfRatings());
         return "welcome";
     }
 
     @SuppressWarnings({"unchecked"})
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String rate(@RequestParam String rating, Map model) {
-        addRating(rating);
+        presentation.addRating(rating);
         model.put("givenRating", rating);
         return "thankYou";
     }
 
-    private int numberOfRatings() {
-        return jdbcTemplate.queryForInt("SELECT COUNT(*) FROM RATINGS");
-    }
-
-    private void addRating(String rating) {
-        jdbcTemplate.update("INSERT INTO RATINGS (RATING) VALUES (?)", valueOf(rating));
-    }
-
-    private int valueOf(String rating) {
-        return possibleRatings().indexOf(rating);
+    @SuppressWarnings({"unchecked"})
+    @RequestMapping(value = "/results", method = RequestMethod.GET)
+    public String results(Map model) {
+        model.put("averageRating", presentation.averageRating());
+        return "results";
     }
 
 }
