@@ -178,40 +178,41 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-antrun-plugin</artifactId>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
                         <executions>
                             <execution>
                                 <id>start-db</id>
                                 <phase>pre-integration-test</phase>
                                 <goals>
-                                    <!--suppress MavenModelInspection -->
-                                    <goal>run</goal>
+                                    <goal>java</goal>
                                 </goals>
                                 <configuration>
-                                    <target>
-                                        <java classname="org.h2.tools.Server"
-                                              classpathref="maven.runtime.classpath"
-                                              fork="true" spawn="true">
-                                            <arg line="-tcp -baseDir ./var"/>
-                                        </java>
-                                    </target>
+                                    <mainClass>org.h2.tools.Server</mainClass>
+                                    <arguments>
+                                        <argument>-tcp</argument>
+                                        <argument>-tcpPort</argument>
+                                        <argument>9092</argument>
+                                        <argument>-baseDir</argument>
+                                        <argument>./var</argument>
+                                        <argument>-tcpDaemon</argument>
+                                    </arguments>
+                                    <cleanupDaemonThreads>false</cleanupDaemonThreads>
                                 </configuration>
                             </execution>
                             <execution>
                                 <id>stop-db</id>
                                 <phase>post-integration-test</phase>
                                 <goals>
-                                    <!--suppress MavenModelInspection -->
-                                    <goal>run</goal>
+                                    <goal>java</goal>
                                 </goals>
                                 <configuration>
-                                    <target>
-                                        <java classname="org.h2.tools.Server"
-                                              classpathref="maven.runtime.classpath">
-                                            <arg line="-tcpShutdown tcp://localhost:9092"/>
-                                        </java>
-                                    </target>
+                                    <mainClass>org.h2.tools.Server</mainClass>
+                                    <arguments>
+                                        <argument>-tcpShutdown</argument>
+                                        <argument>tcp://localhost:9092</argument>
+                                        <argument>-tcpShutdownForce</argument>
+                                    </arguments>
                                 </configuration>
                             </execution>
                         </executions>
@@ -255,9 +256,6 @@
                                     <includes>
                                         <include>**/spec/*Test.java</include>
                                     </includes>
-                                    <excludes>
-                                        <exclude>**/*Test.java</exclude>
-                                    </excludes>
                                     <systemProperties>
                                         <property>
                                             <name>concordion.output.dir</name>
