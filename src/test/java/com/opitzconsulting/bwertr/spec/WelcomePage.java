@@ -2,7 +2,7 @@ package com.opitzconsulting.bwertr.spec;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 public class WelcomePage {
 
@@ -13,9 +13,9 @@ public class WelcomePage {
     }
 
     public void rateWith(String rating) {
-        WebElement option = webDriver.findElement(By.id(rating));
-        option.setSelected();
-        option.submit();
+        Select select = new Select(webDriver.findElement(By.id(rating)));
+        select.selectByValue(rating);
+        select.getFirstSelectedOption().submit();
     }
 
     public String numberOfRatingsShown() {
