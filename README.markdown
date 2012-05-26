@@ -1,7 +1,7 @@
 ATDD Sample Application bwerter
 ===============================
 
-[![Build Status](https://secure.travis-ci.org/nilswloka/bwertr-java.png?branch=seacon)](http://travis-ci.org/nilswloka/bwertr-java)
+[![Build Status](https://secure.travis-ci.org/stefanscheidt/bwertr-java.png?branch=seacon)](http://travis-ci.org/stefanscheidt/bwertr-java)
 
 A simple sample application demonstration ATDD.
 
