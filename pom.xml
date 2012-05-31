@@ -47,6 +47,7 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>7.6.3.v20120416</version>
                 <configuration>
+                    <reload>manual</reload>
                     <scanIntervalSeconds>10</scanIntervalSeconds>
                     <stopKey>killSwitch</stopKey>
                     <stopPort>9999</stopPort>
