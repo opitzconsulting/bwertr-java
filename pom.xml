@@ -96,8 +96,6 @@
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
-            <!-- Intellij IDEA needs more visibility -->
-            <!-- <scope>runtime</scope> -->
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -121,6 +119,12 @@
             <artifactId>concordion</artifactId>
             <version>1.4.2</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>junit</groupId>
+                    <artifactId>junit-dep</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
