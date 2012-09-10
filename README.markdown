@@ -16,7 +16,7 @@ Start up and shut down of the H2 and Jetty server is handled by `jetty-maven-plu
 If you wish to deploy to CloudFoundry, follow these steps:
 
 * `mvn clean package`
-* cd target; vmc push [application name]
+* `cd target; vmc push [application name]`
 
 Make sure to configure a MySQL service for the application.
 
