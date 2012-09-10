@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Map;
@@ -24,16 +23,14 @@ public class BwertrController {
         return asList("Poor", "Average", "Excellent");
     }
 
-    @SuppressWarnings({"unchecked"})
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String welcome(Map model) {
-        model.put("numberOfRatings", jdbcTemplate.queryForInt("SELECT COUNT(*) FROM RATINGS"));
+    public String welcome(Map<String, Object> model) {
+        model.put("numberOfRatings", jdbcTemplate.queryForInt("SELECT COUNT(RATING) FROM RATINGS"));
         return "welcome";
     }
 
-    @SuppressWarnings({"unchecked"})
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public String rate(@RequestParam String rating, Map model) {
+    public String rate(String rating, Map<String, Object> model) {
         model.put("givenRating", rating);
         return "thankYou";
     }
