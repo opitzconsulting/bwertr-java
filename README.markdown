@@ -1,8 +1,6 @@
 ATDD Sample Application bwerter
 ===============================
 
-[![Build Status](https://secure.travis-ci.org/stefanscheidt/bwertr-java.png?branch=master)](http://travis-ci.org/stefanscheidt/bwertr-java)
-
 A simple sample application demonstration ATDD.
 
 * `start-db` starts a H2 database service on port 9092. Hit Ctrl-C to stop the service.

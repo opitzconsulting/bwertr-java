@@ -1,0 +1,27 @@
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+<head>
+    <link type="text/css" rel="stylesheet" href="concordion.css" />
+</head>
+<body>
+<h1>F4: Only one rating per user allowed</h1>
+
+<p>As a presenter, I want only one rating from each user, so that I get a representational average.</p>
+
+<div class="example">
+    <h3>Examples</h3>
+
+    <p>
+        Given I <span concordion:set="#alreadyRated">have</span> already rated the presentation,<br/>
+        When I try to rate the presentation<br/>
+        Then I <span concordion:assertEquals="ratingSuccessfulAfter(#alreadyRated) ? 'succeed' : 'fail')">fail</span>.
+    </p>
+
+    <p>
+        Given I <span concordion:set="#alreadyRated">have not</span> yet rated the presentation,<br/>
+        When I try to rate the presentation<br/>
+        Then I <span concordion:assertEquals="ratingSuccessfulAfter(#alreadyRated) ? 'succeed' : 'fail')">succeed</span>.
+    </p>
+
+</div>
+</body>
+</html>
