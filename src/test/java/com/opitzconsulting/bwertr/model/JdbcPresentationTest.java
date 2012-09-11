@@ -2,84 +2,60 @@ package com.opitzconsulting.bwertr.model;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static java.util.Arrays.asList;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class JdbcPresentationTest {
 
-    private Ratings ratings;
     private JdbcTemplate jdbcTemplate;
-    private JdbcPresentation presentation;
+    private Ratings ratings;
+    private JdbcPresentation jdbcPresentation;
 
     @Before
     public void setUp() throws Exception {
-        ratings = mock(Ratings.class);
         jdbcTemplate = mock(JdbcTemplate.class);
-        presentation = new JdbcPresentation(jdbcTemplate, ratings);
+        ratings = mock(Ratings.class);
+        jdbcPresentation = new JdbcPresentation(jdbcTemplate, ratings);
     }
 
     @Test
-    public void averageRating_forRatingOne_isTextForOne() {
-        String textForOne = "textForOne";
+    public void averageRating_givenRatingOne_returnsTextForOne() {
+        String textForOne = "one";
         givenRatings(1);
-        andTextForRating(textForOne, 1);
-        assertThat(presentation.averageRating(), is(textForOne));
+        givenTextForValue(1, textForOne);
+        assertEquals(textForOne, jdbcPresentation.averageRating());
     }
 
     @Test
-    public void averageRating_forRatingsOneAndThree_isTextForTwo() {
-        String textForTwo = "foo";
+    public void averageRating_givenRatingOneAndThree_returnsTextForTwo() {
+        String textForTwo = "two";
         givenRatings(1, 3);
-        andTextForRating(textForTwo, 2);
-        assertThat(presentation.averageRating(), is(textForTwo));
+        givenTextForValue(2, textForTwo);
+        assertEquals(textForTwo, jdbcPresentation.averageRating());
     }
 
     @Test
-    public void averageRating_forRatingsOneAndTwo_isTextForTwo() {
-        String textForTwo = "textForTwo";
+    public void averageRating_givenRatingOneAndTwo_returnsTextForTwo() {
+        String textForTwo = "two";
         givenRatings(1, 2);
-        andTextForRating(textForTwo, 2);
-        assertThat(presentation.averageRating(), is(textForTwo));
+        givenTextForValue(2, textForTwo);
+        assertEquals(textForTwo, jdbcPresentation.averageRating());
     }
 
-    @Test
-    public void averageRating_forNoRatings_isTextForUnknown() {
-        String textForUnknown = "textForUnknown";
-        givenNoRatings();
-        andTextForUnknown(textForUnknown);
-        assertThat(presentation.averageRating(), is(textForUnknown));
+    private OngoingStubbing<List<Integer>> givenRatings(Integer... ratings) {
+        return when(jdbcTemplate.queryForList(anyString(), eq(Integer.class))).thenReturn(asList(ratings));
     }
 
-    private void givenRatings(int... someRatings) {
-        List<Map<String, Object>> resultWithRatings = new ArrayList<Map<String, Object>>();
-        for (int rating : someRatings) {
-            Map<String, Object> rowWithRating = new HashMap<String, Object>();
-            rowWithRating.put("RATING", rating);
-            resultWithRatings.add(rowWithRating);
-        }
-        when(jdbcTemplate.queryForList(anyString())).thenReturn(resultWithRatings);
+    private OngoingStubbing<String> givenTextForValue(int value, String text) {
+        return when(ratings.textFor(value)).thenReturn(text);
     }
-
-    private void givenNoRatings() {
-        givenRatings();
-    }
-
-    private void andTextForRating(String text, int rating) {
-        when(ratings.textFor(rating)).thenReturn(text);
-    }
-
-    private void andTextForUnknown(String text) {
-        when(ratings.textForUnknown()).thenReturn(text);
-    }
-
 }

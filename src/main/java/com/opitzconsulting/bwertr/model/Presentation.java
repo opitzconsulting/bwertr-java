@@ -3,6 +3,7 @@ package com.opitzconsulting.bwertr.model;
 import java.util.List;
 
 public interface Presentation {
+
     List<String> possibleRatings();
 
     void addRating(String rating);
@@ -10,4 +11,5 @@ public interface Presentation {
     int numberOfRatings();
 
     String averageRating();
+
 }

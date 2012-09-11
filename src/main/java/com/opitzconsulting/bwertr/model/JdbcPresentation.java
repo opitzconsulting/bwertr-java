@@ -5,13 +5,13 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Map;
 
 @Component
 public class JdbcPresentation implements Presentation {
 
-    private final JdbcTemplate jdbcTemplate;
-    private final Ratings ratings;
+    private JdbcTemplate jdbcTemplate;
+
+    private Ratings ratings;
 
     @Autowired
     public JdbcPresentation(JdbcTemplate jdbcTemplate, Ratings ratings) {
@@ -19,39 +19,39 @@ public class JdbcPresentation implements Presentation {
         this.ratings = ratings;
     }
 
+    @Override
     public List<String> possibleRatings() {
         return ratings.possibleRatings();
     }
 
+    @Override
     public void addRating(String rating) {
-        jdbcTemplate.update("INSERT INTO RATINGS (RATING) VALUES (?)", ratings.valueOf(rating));
+        jdbcTemplate.update("INSERT INTO RATINGS(RATING) VALUES (?)", ratings.valueOf(rating));
     }
 
+    @Override
     public int numberOfRatings() {
-        return jdbcTemplate.queryForInt("SELECT COUNT(*) FROM RATINGS");
+        return jdbcTemplate.queryForInt("SELECT COUNT(1) FROM RATINGS");
     }
 
+    @Override
     public String averageRating() {
-        List<Map<String, Object>> allRatings = allRatings();
-        if (allRatings.isEmpty())
-            return ratings.textForUnknown();
-        return ratings.textFor(averageOf(allRatings));
+        return ratings.textFor(averageOf(allRatings()));
     }
 
-    private List<Map<String, Object>> allRatings() {
-        return jdbcTemplate.queryForList("SELECT * FROM RATINGS");
+    private List<Integer> allRatings() {
+        return jdbcTemplate.queryForList("SELECT RATING FROM RATINGS", Integer.class);
     }
 
-    private int averageOf(List<Map<String, Object>> someRatings) {
-        return (int) Math.round((double) sumOf(someRatings) / someRatings.size());
-    }
-
-    private int sumOf(List<Map<String, Object>> someRatings) {
-        int sumOfRatings = 0;
-        for (Map<String, Object> rowWithRating : someRatings) {
-            sumOfRatings += (Integer) rowWithRating.get("RATING");
+    private int sumOf(List<Integer> ratings) {
+        int sum = 0;
+        for (int rating : ratings) {
+            sum += rating;
         }
-        return sumOfRatings;
+        return sum;
     }
 
+    private int averageOf(List<Integer> ratings) {
+        return (int) Math.round((double) sumOf(ratings) / ratings.size());
+    }
 }
