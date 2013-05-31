@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/stefanscheidt/bwertr-java.png?branch=master)](https://travis-ci.org/stefanscheidt/bwertr-java)
+
 ATDD Sample Application bwerter
 ===============================
 
