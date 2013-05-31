@@ -10,7 +10,7 @@ public class ShowNumberOfRatingsTest extends AbstractSpringBwertrSpec {
 
     private void ensureNumberOfRatingsExist(int numberOfRatings) {
         resetBwertr();
-        for (int count = 0; count < numberOfRatings; count ++) {
+        for (int count = 0; count < numberOfRatings; count++) {
             bwertrDriver.rateWith("Average");
         }
     }

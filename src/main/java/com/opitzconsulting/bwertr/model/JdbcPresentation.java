@@ -26,12 +26,12 @@ public class JdbcPresentation implements Presentation {
 
     @Override
     public void addRating(String rating) {
-        jdbcTemplate.update("INSERT INTO RATINGS(RATING) VALUES (?)", ratings.valueOf(rating));
+        jdbcTemplate.update("INSERT INTO RATINGS (RATING) VALUES (?)", ratings.valueOf(rating));
     }
 
     @Override
     public int numberOfRatings() {
-        return jdbcTemplate.queryForInt("SELECT COUNT(1) FROM RATINGS");
+        return jdbcTemplate.queryForObject("SELECT COUNT(RATING) FROM RATINGS", Integer.class);
     }
 
     @Override

@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public abstract class AbstractBwertrSpec {
 
-    protected final BwertrDriver bwertrDriver = new BwertrDriver();
+    protected BwertrDriver bwertrDriver = new BwertrDriver();
 
     @BeforeClass
     public static void extendConcordion() {
