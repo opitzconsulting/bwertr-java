@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Map;
@@ -28,7 +29,7 @@ public class BwertrController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public String rate(String rating, Map<String, Object> model) {
+    public String rate(@RequestParam("rating") String rating, Map<String, Object> model) {
         presentation.addRating(rating);
         model.put("givenRating", rating);
         model.put("averageRating", presentation.averageRating());

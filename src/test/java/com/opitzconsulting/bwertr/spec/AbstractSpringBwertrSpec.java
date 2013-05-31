@@ -13,8 +13,8 @@ public abstract class AbstractSpringBwertrSpec extends AbstractBwertrSpec {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    protected int resetBwertr() {
-        return jdbcTemplate.update("DELETE FROM RATINGS");
+    protected void resetBwertr() {
+        jdbcTemplate.update("DELETE FROM RATINGS");
     }
 
 }

@@ -23,7 +23,7 @@ Make sure to configure a MySQL service for the application.
 The bwertr kata
 ===============
 
-If you want practice different parts of the bwertr kata, you can use the `iterations` branch with
+If you want practice different parts of the bwertr kata, you can use the `iteration` branches with
 its various tags as starting point:
 
 * `iteration-1` points to the "blank" project. Start here, if you want to do the whole kata.
