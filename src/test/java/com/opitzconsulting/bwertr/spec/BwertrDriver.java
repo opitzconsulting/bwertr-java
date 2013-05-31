@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 
 public class BwertrDriver {
 
-    private final WebDriver webDriver = new HtmlUnitDriver();
+    private WebDriver webDriver = new HtmlUnitDriver();
 
     public void visitBwertr() {
         webDriver.get("http://localhost:8080");
@@ -31,4 +31,5 @@ public class BwertrDriver {
     public String givenRatingShown() {
         return webDriver.findElement(By.id("givenRating")).getText();
     }
+
 }
