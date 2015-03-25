@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/stefanscheidt/bwertr-java.png?branch=master)](https://travis-ci.org/stefanscheidt/bwertr-java)
-
 ATDD Sample Application bwerter
 ===============================
 
@@ -10,17 +8,10 @@ A simple sample application demonstration ATDD.
 
 You can also run the integration tests with Maven by activating the `spec` profile:
 
-`mvn -P spec clean integration-test`
+`mvn -Pspec clean verify`
 
 Start up and shut down of the H2 and Jetty server is handled by `jetty-maven-plugin` and
 `exec-maven-plugin` and should work with your CI server.
-
-If you wish to deploy to CloudFoundry, follow these steps:
-
-* `mvn clean package`
-* `cd target; vmc push [application name]`
-
-Make sure to configure a MySQL service for the application.
 
 The bwertr kata
 ===============
