@@ -19,7 +19,7 @@ public class BwertrController {
 
     @ModelAttribute("possibleRatings")
     public List<String> possibleRatings() {
-        return presentation.possibleRatingsForPresentation();
+        return presentation.possibleRatings();
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -32,6 +32,7 @@ public class BwertrController {
     public String rate(@RequestParam("rating") String rating, Map<String, Object> model) {
         presentation.addRating(rating);
         model.put("givenRating", rating);
+        model.put("averageRating", presentation.averageRating());
         return "thankyou";
     }
 

@@ -5,9 +5,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 public class ShowNumberOfRatingsTest extends AbstractSpringBwertrSpec {
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
-
     public String numberOfRatingsShownWhenThereAre(int numberOfRatings) {
         ensureNumberOfRatingsExist(numberOfRatings);
         bwertrDriver.visitBwertr();
@@ -19,10 +16,6 @@ public class ShowNumberOfRatingsTest extends AbstractSpringBwertrSpec {
         for (int i = 0; i < numberOfRatings; i++) {
             bwertrDriver.rateWith("Average");
         }
-    }
-
-    private void resetBwertr() {
-        jdbcTemplate.update("DELETE FROM RATINGS");
     }
 
 }
