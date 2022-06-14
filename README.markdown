@@ -1,3 +1,8 @@
+---
+**NOTE**
+This repository is DEPRECATED!
+---
+
 ATDD Sample Application bwerter
 ===============================
 
