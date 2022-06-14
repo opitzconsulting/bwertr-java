@@ -1,10 +1,10 @@
+ATDD Sample Application bwerter
+===============================
+
 ---
 **NOTE**
 This repository is DEPRECATED!
 ---
-
-ATDD Sample Application bwerter
-===============================
 
 A simple sample application demonstration ATDD.
 
